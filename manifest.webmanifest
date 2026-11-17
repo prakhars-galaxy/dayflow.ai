@@ -1,0 +1,19 @@
+{
+  "name": "DAYFLOW AI \u2014 Personal Productivity",
+  "short_name": "DAYFLOW AI",
+  "description": "Understand your time, protect your attention and make room for what matters.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f4f7fb",
+  "theme_color": "#14243b",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

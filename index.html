@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14243b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="DAYFLOW AI">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>DAYFLOW AI — Make your day work for you</title>
+<style>
+:root{--bg:#f4f7fb;--panel:#fff;--ink:#172943;--muted:#718096;--line:#e5ebf2;--teal:#07968c;--teal2:#dff5f1;--blue:#477dc2;--purple:#8069b5;--amber:#d9953d;--red:#d66c6c;--green:#438f65;--shadow:0 12px 34px rgba(25,48,77,.08)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.app{display:grid;grid-template-columns:245px 1fr;min-height:100vh}
+.sidebar{background:#14243b;color:#eaf1fa;padding:25px 17px;display:flex;flex-direction:column;gap:24px}.brand{display:flex;gap:11px;align-items:center;padding:4px 8px}.logo{width:39px;height:39px;border-radius:13px;background:linear-gradient(135deg,#18b5a8,#477dc2);display:grid;place-items:center;font-weight:900;color:white;font-size:20px}.brand strong{font-size:17px;letter-spacing:.3px}.brand small{display:block;color:#9fb0c6;font-size:11px}.nav{display:grid;gap:7px}.nav button{color:#bdc9d8;background:transparent;text-align:left;padding:12px 13px;border-radius:11px;display:flex;gap:12px;align-items:center;font-weight:600}.nav button.active,.nav button:hover{background:#263b58;color:white}.nav .ico{width:20px;text-align:center;font-size:17px}.side-note{margin-top:auto;background:#203651;border:1px solid #304965;padding:15px;border-radius:14px;color:#c6d4e5;font-size:12px}.side-note b{display:block;color:white;margin-bottom:5px}.main{min-width:0;padding:26px clamp(18px,3vw,42px) 50px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:27px}.eyebrow{color:var(--teal);font-weight:800;font-size:11px;letter-spacing:1.5px;text-transform:uppercase}.topbar h1{font-size:27px;line-height:1.2;margin:4px 0 0;letter-spacing:-.7px}.top-actions{display:flex;align-items:center;gap:10px}.date-pill,.avatar{border:1px solid var(--line);background:white;border-radius:12px;padding:9px 13px;color:var(--muted);font-size:12px}.avatar{border-radius:50%;width:39px;height:39px;padding:0;display:grid;place-items:center;color:var(--teal);font-weight:800;background:var(--teal2)}
+.page{display:none}.page.active{display:block}.grid{display:grid;gap:17px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:18px}.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:19px;box-shadow:var(--shadow)}.stat-label{color:var(--muted);font-size:12px;font-weight:650}.stat-value{font-size:27px;font-weight:800;letter-spacing:-.8px;margin:7px 0 2px}.stat-foot{font-size:11px;color:var(--muted)}.stat-icon{float:right;width:35px;height:35px;border-radius:11px;display:grid;place-items:center;background:var(--teal2);color:var(--teal);font-size:17px}
+.two{grid-template-columns:minmax(0,1.5fr) minmax(300px,.9fr)}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.section-head h2{font-size:16px;margin:0}.section-head p{margin:3px 0 0;color:var(--muted);font-size:12px}.btn{background:var(--teal);color:white;padding:10px 14px;border-radius:10px;font-size:12px;font-weight:750;box-shadow:0 5px 12px #07968c22}.btn:hover{filter:brightness(.96);transform:translateY(-1px)}.btn.secondary{background:#edf3f8;color:#314862;box-shadow:none}.btn.ghost{background:transparent;color:var(--teal);box-shadow:none;padding:7px}.btn.danger{background:#fff0f0;color:#bd5353;box-shadow:none}.schedule{display:grid;gap:9px}.schedule-row{display:grid;grid-template-columns:68px 1fr;gap:12px;align-items:stretch}.time{font-size:11px;color:var(--muted);padding-top:12px;font-weight:700}.event{border-left:4px solid var(--blue);background:#f1f6fc;border-radius:9px;padding:10px 12px;display:flex;justify-content:space-between;gap:10px;align-items:center}.event.teal{border-color:var(--teal);background:#eef9f7}.event.purple{border-color:var(--purple);background:#f5f1fb}.event.amber{border-color:var(--amber);background:#fff8ed}.event b{font-size:12px}.event small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.tag{font-size:10px;border-radius:30px;padding:4px 8px;background:white;color:var(--muted);white-space:nowrap}
+.progress-wrap{height:8px;background:#edf1f5;border-radius:20px;overflow:hidden;margin:10px 0}.progress{height:100%;background:linear-gradient(90deg,var(--teal),#62c8b7);border-radius:20px;width:0;transition:width .3s}.focus-card{background:linear-gradient(145deg,#162b48,#254b67);color:white;border:0}.focus-card .muted{color:#b6c8d8}.timer{font-size:49px;letter-spacing:1px;font-weight:800;text-align:center;margin:20px 0 8px;font-variant-numeric:tabular-nums}.timer-controls{display:flex;justify-content:center;gap:9px}.focus-mode{display:flex;gap:6px;justify-content:center}.focus-mode button{border:1px solid #58738c;background:transparent;color:#d6e4ef;border-radius:30px;padding:6px 10px;font-size:10px}.focus-mode button.selected{background:#fff;color:#18314e}
+.ai-card{background:linear-gradient(135deg,#e9f8f5,#f4f7ff);border:1px solid #d9eeeb}.ai-title{display:flex;gap:9px;align-items:center}.spark{width:32px;height:32px;border-radius:10px;background:var(--teal);color:white;display:grid;place-items:center}.suggestion{background:#fff;border:1px solid #dcece9;padding:12px;border-radius:12px;margin-top:12px}.suggestion b{font-size:12px}.suggestion p{font-size:11px;color:var(--muted);margin:4px 0 9px}.chip{display:inline-block;background:#edf7f5;color:#16877e;border-radius:20px;padding:4px 8px;font-size:10px;font-weight:700}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:grid;gap:5px}.field label{font-size:11px;color:var(--muted);font-weight:700}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px 11px;color:var(--ink);outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px #07968c16}.field.full{grid-column:1/-1}.task-list{display:grid;gap:9px}.task{display:flex;align-items:center;gap:11px;padding:12px;border:1px solid var(--line);border-radius:12px;background:white}.task input{accent-color:var(--teal);width:17px;height:17px}.task.done .task-name{text-decoration:line-through;color:#9aa6b5}.task-name{font-weight:700;font-size:12px;flex:1}.task-meta{font-size:10px;color:var(--muted)}.priority{font-size:9px;font-weight:800;padding:4px 7px;border-radius:20px}.priority.High{background:#fff0ee;color:#c65b51}.priority.Medium{background:#fff5e6;color:#a66b1d}.priority.Low{background:#edf4fc;color:#4b78ae}
+.bar-list{display:grid;gap:13px}.bar-row{display:grid;grid-template-columns:100px 1fr 40px;gap:10px;align-items:center;font-size:11px}.bar-track{height:9px;background:#edf1f5;border-radius:20px;overflow:hidden}.bar-fill{height:100%;border-radius:20px;background:var(--teal)}.empty{padding:25px;text-align:center;color:var(--muted);font-size:12px;border:1px dashed #d5dee8;border-radius:12px}.notice{font-size:11px;color:var(--muted);line-height:1.6;background:#f7f9fc;padding:12px;border-radius:11px}.modal-backdrop{position:fixed;inset:0;background:#0d1e34a8;display:none;align-items:center;justify-content:center;padding:18px;z-index:10}.modal-backdrop.show{display:flex}.modal{width:min(540px,100%);background:white;border-radius:18px;padding:23px;box-shadow:0 25px 70px #08162955}.modal h2{margin:0 0 16px;font-size:19px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:17px}.toast{position:fixed;bottom:22px;right:22px;background:#18314e;color:white;padding:12px 16px;border-radius:11px;box-shadow:var(--shadow);display:none;z-index:20;font-size:12px}.toast.show{display:block}.well-grid{grid-template-columns:repeat(3,1fr)}.well{border:1px solid var(--line);border-radius:14px;padding:16px;background:white}.well b{font-size:13px}.well p{font-size:11px;color:var(--muted);margin:5px 0 0}.toggle{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--muted)}.toggle input{accent-color:var(--teal)}.small{font-size:11px;color:var(--muted)}.divider{height:1px;background:var(--line);margin:15px 0}
+@media(max-width:1000px){.app{grid-template-columns:76px 1fr}.sidebar{padding:20px 10px}.brand{justify-content:center;padding:0}.brand>div:last-child,.nav .label,.side-note{display:none}.nav button{justify-content:center;padding:12px 5px}.stats{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}}
+@media(max-width:650px){.app{display:block}.sidebar{position:sticky;top:0;z-index:5;padding:8px;background:#14243b;flex-direction:row;align-items:center;gap:8px}.brand{padding:0 5px}.brand>div:last-child{display:none}.logo{width:34px;height:34px}.nav{display:flex;overflow:auto;flex:1}.nav button{padding:9px 11px;white-space:nowrap}.nav .label{display:none}.main{padding:19px 13px 35px}.topbar{align-items:flex-start}.topbar h1{font-size:22px}.date-pill{display:none}.stats{gap:9px}.card{padding:14px}.stat-value{font-size:23px}.form-grid,.well-grid{grid-template-columns:1fr}.schedule-row{grid-template-columns:48px 1fr}.event{padding:9px}.bar-row{grid-template-columns:83px 1fr 30px}.top-actions{gap:5px}}
+
+/* Mobile app presentation */
+@media(max-width:650px){
+  body{padding-bottom:calc(74px + env(safe-area-inset-bottom));}
+  .app{display:block;min-height:100dvh}
+  .sidebar{position:fixed;z-index:25;left:0;right:0;bottom:0;top:auto;height:calc(66px + env(safe-area-inset-bottom));padding:6px 5px calc(6px + env(safe-area-inset-bottom));background:#14243b;display:block;border-top:1px solid #30445f;box-shadow:0 -8px 24px #10233a20}
+  .brand,.side-note{display:none!important}
+  .nav{height:100%;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;align-items:center}
+  .nav button{height:52px;min-width:0;padding:4px 1px;border-radius:10px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;color:#aebdd0;font-size:9px}
+  .nav button.active{background:#263b58;color:#fff}
+  .nav .ico{display:block;width:auto;font-size:17px;line-height:19px}
+  .nav .label{display:block;font-size:8px;line-height:10px;white-space:nowrap;letter-spacing:-.2px}
+  .main{padding:16px 12px 24px}
+  .topbar{margin-bottom:17px;align-items:center}
+  .topbar h1{font-size:20px;max-width:245px}
+  .eyebrow{font-size:9px}
+  .top-actions{gap:5px}
+  .date-pill{display:none}
+  .avatar{width:34px;height:34px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .card{border-radius:14px;padding:13px;box-shadow:0 5px 18px rgba(25,48,77,.055)}
+  .stat-value{font-size:22px}
+  .stat-icon{width:29px;height:29px}
+  .two{grid-template-columns:minmax(0,1fr);gap:12px}
+  .section-head{align-items:flex-start}
+  .section-head h2{font-size:14px}
+  .section-head p{font-size:10px}
+  .btn{padding:9px 11px;font-size:11px}
+  .schedule-row{grid-template-columns:54px minmax(0,1fr);gap:7px}
+  .time{font-size:9px}
+  .event{padding:9px 8px;min-width:0}
+  .event b{font-size:11px}
+  .event small{font-size:9px}
+  .tag{font-size:8px;padding:3px 6px}
+  .timer{font-size:43px;margin:16px 0}
+  .form-grid{grid-template-columns:1fr}
+  .field.full{grid-column:auto}
+  .well-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .well{padding:12px}
+  .well b{font-size:11px}
+  .well p{font-size:10px}
+  .bar-row{grid-template-columns:75px minmax(0,1fr) 32px;font-size:10px}
+  .modal-backdrop{align-items:flex-end;padding:0}
+  .modal{width:100%;max-height:88dvh;overflow:auto;border-radius:20px 20px 0 0;padding:21px 17px calc(20px + env(safe-area-inset-bottom))}
+  .modal h2{font-size:18px}
+  .modal-actions{position:sticky;bottom:0;background:white;padding-top:10px}
+  .task{gap:7px;padding:10px}
+  .task-name{font-size:11px}
+  .task-meta{font-size:9px}
+  .task .btn.ghost{padding:5px}
+  .ai-card{padding:14px}
+  .suggestion{padding:10px}
+  .notice{font-size:10px}
+}
+@media(min-width:651px) and (max-width:1000px){
+ .nav .label{display:none}
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="logo">D</div><div><strong>DAYFLOW AI</strong><small>Personal productivity system</small></div></div>
+  <nav class="nav">
+    <button class="active" data-page="dashboard"><span class="ico">▦</span><span class="label">Overview</span></button>
+    <button data-page="planner"><span class="ico">◷</span><span class="label">Planner</span></button>
+    <button data-page="tasks"><span class="ico">✓</span><span class="label">Tasks</span></button>
+    <button data-page="insights"><span class="ico">▥</span><span class="label">Insights</span></button>
+    <button data-page="focus"><span class="ico">◎</span><span class="label">Focus</span></button>
+    <button data-page="wellbeing"><span class="ico">♡</span><span class="label">Wellbeing</span></button>
+    <button data-page="settings"><span class="ico">⚙</span><span class="label">Settings</span></button>
+  </nav>
+  <div class="side-note"><b>Designed around your life</b>DAYFLOW helps you make intentional choices with your time. Rest and personal commitments matter too.</div>
+</aside>
+<main class="main">
+<header class="topbar"><div><div class="eyebrow" id="greeting">YOUR PERSONAL DAYFLOW</div><h1 id="pageTitle">Good day. Let's make it count.</h1></div><div class="top-actions"><div class="date-pill" id="todayDate"></div><div class="avatar">DF</div></div></header>
+
+<section class="page active" id="dashboard">
+  <div class="grid stats">
+    <div class="card"><span class="stat-icon">◷</span><div class="stat-label">Planned today</div><div class="stat-value" id="plannedStat">0h 0m</div><div class="stat-foot">Time allocated to tasks</div></div>
+    <div class="card"><span class="stat-icon">✓</span><div class="stat-label">Tasks completed</div><div class="stat-value" id="doneStat">0 / 0</div><div class="stat-foot">Progress, not perfection</div></div>
+    <div class="card"><span class="stat-icon">◎</span><div class="stat-label">Focus time logged</div><div class="stat-value" id="focusStat">0m</div><div class="stat-foot">Tracked in Focus Studio</div></div>
+    <div class="card"><span class="stat-icon">✧</span><div class="stat-label">Open time identified</div><div class="stat-value" id="gapStat">0h</div><div class="stat-foot">Potential space in your day</div></div>
+  </div>
+  <div class="grid two">
+    <div class="card">
+      <div class="section-head"><div><h2>Today's plan</h2><p>Your commitments and planned activities</p></div><button class="btn" onclick="openTaskModal()">+ Add task</button></div>
+      <div id="todaySchedule" class="schedule"></div>
+      <div class="divider"></div><div class="section-head"><h2>Daily completion</h2><span class="small" id="completionLabel">0%</span></div><div class="progress-wrap"><div class="progress" id="completionBar"></div></div>
+    </div>
+    <div class="grid" style="align-content:start">
+      <div class="card ai-card">
+        <div class="ai-title"><div class="spark">✧</div><div><b>DAYFLOW AI Coach</b><div class="small">Suggestions based on your plan</div></div></div>
+        <div id="aiSuggestions"></div>
+        <button class="btn secondary" style="width:100%;margin-top:12px" onclick="generateSuggestions()">↻ Refresh suggestions</button>
+      </div>
+      <div class="card focus-card">
+        <div class="section-head"><div><h2 style="color:white">Quick focus</h2><p class="muted">A short session, one task at a time</p></div><span>◎</span></div>
+        <div class="focus-mode"><button class="selected" data-min="25">25 min</button><button data-min="45">45 min</button><button data-min="60">60 min</button></div>
+        <div class="timer" id="miniTimer">25:00</div>
+        <div class="timer-controls"><button class="btn" onclick="toggleTimer()">Start focus</button><button class="btn secondary" onclick="resetTimer()">Reset</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="planner">
+  <div class="grid two">
+    <div class="card"><div class="section-head"><div><h2>Build a realistic day</h2><p>Add tasks, fixed commitments and personal time.</p></div><button class="btn" onclick="openTaskModal()">+ Add</button></div><div id="plannerSchedule" class="schedule"></div></div>
+    <div class="card"><h2 style="font-size:16px;margin:0 0 5px">Your planning principles</h2><p class="small">A good plan reflects real life—not an idealised perfect day.</p>
+      <div class="notice">• Add fixed commitments first.<br>• Estimate task duration realistically.<br>• Leave buffer time between demanding activities.<br>• Include meals, movement, family and rest.<br>• Re-plan when the day changes.</div>
+      <div class="divider"></div><button class="btn secondary" onclick="generateSuggestions()">Ask AI to review my day</button>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="tasks">
+  <div class="card"><div class="section-head"><div><h2>Tasks & priorities</h2><p>Turn intentions into manageable actions.</p></div><button class="btn" onclick="openTaskModal()">+ Add task</button></div><div id="taskList" class="task-list"></div></div>
+</section>
+
+<section class="page" id="insights">
+  <div class="grid two">
+    <div class="card"><div class="section-head"><div><h2>Where your planned time goes</h2><p>Based on categories assigned to your tasks</p></div></div><div id="timeBars" class="bar-list"></div></div>
+    <div class="card"><h2 style="font-size:16px;margin:0 0 6px">Time-use snapshot</h2><p class="small">Planned time is not the same as actual time. Log focus sessions and update task status to improve your picture.</p><div class="divider"></div><div id="insightSummary"></div></div>
+  </div>
+  <div class="card" style="margin-top:17px"><h2 style="font-size:16px;margin:0 0 7px">Understand your time</h2><p class="small">Use this page as a reflection tool. DAYFLOW does not assume that every unallocated minute is wasted time.</p><div class="notice">Look for patterns: Which activities take longer than expected? When do interruptions occur? Are you leaving enough time for rest and personal responsibilities? Use these observations to adjust tomorrow's plan.</div></div>
+</section>
+
+<section class="page" id="focus">
+  <div class="grid two">
+    <div class="card focus-card"><div class="section-head"><div><h2 style="color:white">Focus studio</h2><p class="muted">Choose one meaningful task and begin.</p></div><span>◎</span></div>
+      <div class="focus-mode"><button class="selected" data-min="25">25 min</button><button data-min="45">45 min</button><button data-min="60">60 min</button></div>
+      <div class="timer" id="focusTimer">25:00</div><div class="timer-controls"><button class="btn" id="focusStart" onclick="toggleTimer()">Start focus</button><button class="btn secondary" onclick="resetTimer()">Reset</button></div>
+      <div class="small muted" style="text-align:center;margin-top:14px">A gentle structure—not a measure of your worth.</div>
+    </div>
+    <div class="card"><h2 style="font-size:16px;margin:0 0 6px">Reduce interruptions</h2><p class="small">Set up your environment before starting a session.</p>
+      <label class="toggle"><input type="checkbox" id="phoneAway"> Put my phone out of reach</label><br>
+      <label class="toggle"><input type="checkbox" id="notificationsOff"> Silence non-essential notifications</label><br>
+      <label class="toggle"><input type="checkbox" id="oneTask"> Work on one task only</label><br>
+      <label class="toggle"><input type="checkbox" id="breakPlan"> Plan a short break after this session</label>
+      <div class="divider"></div><div class="small">Completed focus minutes today: <b id="focusTotal">0</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="wellbeing">
+  <div class="card"><div class="section-head"><div><h2>Well-being belongs in the plan</h2><p>Productivity should support a full life—not fill every available minute.</p></div></div>
+    <div class="grid well-grid">
+      <div class="well"><b>♡ Rest & recovery</b><p>Protect sleep, pauses and recovery time.</p></div>
+      <div class="well"><b>↟ Movement</b><p>Make room for walks, exercise and stretching.</p></div>
+      <div class="well"><b>⌂ Relationships</b><p>Reserve time for family, friends and caregiving.</p></div>
+      <div class="well"><b>✧ Personal growth</b><p>Keep space for learning and meaningful interests.</p></div>
+      <div class="well"><b>☼ Meals & essentials</b><p>Include meals, errands and daily necessities.</p></div>
+      <div class="well"><b>◷ Flexibility</b><p>Keep a buffer for unexpected events.</p></div>
+    </div>
+    <div class="divider"></div><div class="notice"><b>DAYFLOW principle:</b> AI recommendations should never treat rest, caregiving or personal time as unproductive gaps. You decide what matters and what belongs in your day.</div>
+  </div>
+</section>
+
+<section class="page" id="settings">
+  <div class="card"><h2 style="font-size:16px;margin:0 0 5px">Your preferences</h2><p class="small">These settings guide the local recommendation engine.</p>
+    <div class="form-grid" style="margin-top:18px">
+      <div class="field"><label>Your name</label><input id="userName" placeholder="What should we call you?"></div>
+      <div class="field"><label>Daily start time</label><input id="dayStart" type="time" value="07:00"></div>
+      <div class="field"><label>Daily end time</label><input id="dayEnd" type="time" value="22:00"></div>
+      <div class="field"><label>Preferred focus session</label><select id="prefFocus"><option value="25">25 minutes</option><option value="45">45 minutes</option><option value="60">60 minutes</option></select></div>
+      <div class="field full"><label>What matters most to you?</label><select id="mainGoal"><option>Balanced productivity and well-being</option><option>Study and learning</option><option>Professional work</option><option>Home and family responsibilities</option><option>Personal goals and routines</option></select></div>
+    </div>
+    <div style="display:flex;gap:9px;margin-top:16px"><button class="btn" onclick="saveSettings()">Save preferences</button><button class="btn danger" onclick="resetData()">Reset demo data</button></div>
+    <div class="divider"></div><h3 style="font-size:14px">AI & privacy</h3><div class="notice">This standalone demo uses a local, rule-based recommendation engine. Your tasks and preferences stay in this browser's local storage. No data is sent to an AI service. A real generative-AI integration requires a secure backend and an AI provider API key; never put a secret API key directly in front-end code.</div>
+  </div>
+</section>
+</main>
+</div>
+
+<div class="modal-backdrop" id="taskModal"><div class="modal"><h2 id="modalTitle">Add a task</h2>
+  <form id="taskForm"><div class="form-grid">
+    <div class="field full"><label>Task or activity</label><input id="taskName" required maxlength="80" placeholder="e.g. Prepare project presentation"></div>
+    <div class="field"><label>Category</label><select id="taskCategory"><option>Work</option><option>Study</option><option>Home</option><option>Personal</option><option>Well-being</option><option>Other</option></select></div>
+    <div class="field"><label>Priority</label><select id="taskPriority"><option>High</option><option selected>Medium</option><option>Low</option></select></div>
+    <div class="field"><label>Start time</label><input id="taskStart" type="time" value="09:00" required></div>
+    <div class="field"><label>Duration (minutes)</label><input id="taskDuration" type="number" min="5" max="720" value="30" required></div>
+  </div><div class="modal-actions"><button type="button" class="btn secondary" onclick="closeTaskModal()">Cancel</button><button class="btn" type="submit">Save task</button></div></form>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const STORE='dayflow_ai_v1';
+let state=loadState(), timerSeconds=25*60, timerInterval=null, timerRunning=false, sessionStart=null, selectedMinutes=25, editingId=null;
+function loadState(){try{const v=JSON.parse(localStorage.getItem(STORE));if(v)return v}catch(e){}return {tasks:[
+{id:1,name:'Review today’s priorities',category:'Personal',priority:'High',start:'08:00',duration:20,done:false},
+{id:2,name:'Focused study / work session',category:'Work',priority:'High',start:'09:00',duration:60,done:false},
+{id:3,name:'Emails and follow-ups',category:'Work',priority:'Medium',start:'10:30',duration:30,done:false},
+{id:4,name:'Lunch and a proper break',category:'Well-being',priority:'Medium',start:'13:00',duration:45,done:false},
+{id:5,name:'Personal or family time',category:'Home',priority:'Medium',start:'18:00',duration:60,done:false}
+],focusMinutes:0,settings:{name:'',start:'07:00',end:'22:00',focus:25,goal:'Balanced productivity and well-being'}}}
+function save(){localStorage.setItem(STORE,JSON.stringify(state));render()}
+function mins(t){let [h,m]=t.split(':').map(Number);return h*60+m}
+function hm(n){return `${Math.floor(n/60)}h ${n%60}m`}
+function fmtTime(t){let [h,m]=t.split(':').map(Number);let ap=h>=12?'PM':'AM';h=h%12||12;return `${h}:${String(m).padStart(2,'0')} ${ap}`}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function sorted(){return [...state.tasks].sort((a,b)=>a.start.localeCompare(b.start))}
+function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2600)}
+function render(){
+ const tasks=sorted(),total=tasks.reduce((a,t)=>a+Number(t.duration),0),done=tasks.filter(t=>t.done).length,percent=tasks.length?Math.round(done/tasks.length*100):0;
+ $('plannedStat').textContent=hm(total);$('doneStat').textContent=`${done} / ${tasks.length}`;$('focusStat').textContent=state.focusMinutes>=60?hm(state.focusMinutes):state.focusMinutes+'m';
+ const gaps=calculateGaps();$('gapStat').textContent=hm(gaps.reduce((a,g)=>a+g.duration,0));
+ $('completionLabel').textContent=percent+'%';$('completionBar').style.width=percent+'%';
+ $('todaySchedule').innerHTML=tasks.length?tasks.map(eventHTML).join(''):'<div class="empty">No tasks yet. Add your first activity to begin planning.</div>';
+ $('plannerSchedule').innerHTML=tasks.length?tasks.map(eventHTML).join(''):'<div class="empty">Your day is open. Add a task or commitment.</div>';
+ $('taskList').innerHTML=tasks.length?tasks.map(t=>`<div class="task ${t.done?'done':''}"><input type="checkbox" ${t.done?'checked':''} onchange="toggleTask(${t.id})"><div class="task-name">${esc(t.name)}<div class="task-meta">${esc(t.category)} · ${fmtTime(t.start)} · ${t.duration} min</div></div><span class="priority ${t.priority}">${t.priority}</span><button class="btn ghost" onclick="editTask(${t.id})">Edit</button><button class="btn ghost" onclick="deleteTask(${t.id})">×</button></div>`).join(''):'<div class="empty">No tasks added yet.</div>';
+ $('focusTotal').textContent=state.focusMinutes;
+ renderBars();renderSummary();generateSuggestions(false);
+}
+function eventHTML(t){let c=t.category==='Study'?'purple':t.category==='Well-being'?'amber':t.category==='Home'?'teal':'';return `<div class="schedule-row"><div class="time">${fmtTime(t.start)}</div><div class="event ${c}"><div><b>${esc(t.name)}</b><small>${esc(t.category)} · ${t.duration} minutes</small></div><span class="tag">${t.done?'Completed':t.priority+' priority'}</span></div></div>`}
+function calculateGaps(){
+ const start=mins(state.settings.start||'07:00'),end=mins(state.settings.end||'22:00'),ts=sorted(),gaps=[];let cursor=start;
+ ts.forEach(t=>{let st=mins(t.start),en=st+Number(t.duration);if(st>cursor)gaps.push({start:cursor,end:st,duration:st-cursor});cursor=Math.max(cursor,en)});
+ if(end>cursor)gaps.push({start:cursor,end,duration:end-cursor});
+ return gaps.filter(g=>g.duration>=15);
+}
+function generateSuggestions(show=true){
+ const gaps=calculateGaps(),tasks=sorted().filter(t=>!t.done),high=tasks.filter(t=>t.priority==='High');
+ let html='';
+ if(!tasks.length) html='<div class="suggestion"><b>Your schedule is clear</b><p>Add tasks and commitments. DAYFLOW can then identify open time and suggest next steps.</p></div>';
+ else if(gaps.length){
+   const g=gaps.sort((a,b)=>b.duration-a.duration)[0],slot=`${fmtTime(Math.floor(g.start/60)+':'+String(g.start%60).padStart(2,'0'))}`;
+   const candidate=high.find(t=>t.duration<=g.duration)||tasks.find(t=>t.duration<=g.duration);
+   html=`<div class="suggestion"><span class="chip">OPEN WINDOW · ${g.duration} MIN</span><p><b>${fmtTime(toTime(g.start))} – ${fmtTime(toTime(g.end))}</b> appears open in your plan.</p>${candidate?`<b>Suggested next step: ${esc(candidate.name)}</b><p>This task fits the available window. Consider a short buffer before your next commitment.</p><button class="btn" onclick="placeTask(${candidate.id},${g.start})">Use this time</button>`:`<b>Protect this space</b><p>Consider a break, meal, movement or personal time. Not every gap needs to be filled.</p>`}</div>`;
+ }else html='<div class="suggestion"><b>Your schedule looks full.</b><p>Consider reducing task load, shortening lower-priority activities or protecting a break. Avoid filling every minute.</p></div>';
+ if(high.length)html+=`<div class="suggestion"><b>Priority to consider</b><p>${esc(high[0].name)} is marked high priority. If it is important today, reserve a realistic uninterrupted block.</p></div>`;
+ $('aiSuggestions').innerHTML=html;
+ if(show)toast('Your day review has been refreshed.');
+}
+function toTime(n){return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')}
+function placeTask(id,start){let t=state.tasks.find(x=>x.id===id);if(!t)return;t.start=toTime(start);save();toast('Task moved into the selected open window.')}
+function renderBars(){
+ const cats=['Work','Study','Home','Personal','Well-being','Other'];let vals=cats.map(c=>state.tasks.filter(t=>t.category===c).reduce((a,t)=>a+Number(t.duration),0));let max=Math.max(1,...vals);
+ $('timeBars').innerHTML=cats.map((c,i)=>`<div class="bar-row"><span>${c}</span><div class="bar-track"><div class="bar-fill" style="width:${vals[i]/max*100}%;background:${['#477dc2','#8069b5','#07968c','#d9953d','#438f65','#94a3b8'][i]}"></div></div><b>${vals[i]}m</b></div>`).join('');
+}
+function renderSummary(){let tasks=state.tasks,total=tasks.reduce((a,t)=>a+Number(t.duration),0),done=tasks.filter(t=>t.done).length; $('insightSummary').innerHTML=`<div class="stat-label">Planned task time</div><div class="stat-value">${hm(total)}</div><div class="divider"></div><div class="stat-label">Tasks marked complete</div><div class="stat-value">${tasks.length?Math.round(done/tasks.length*100):0}%</div><div class="divider"></div><div class="stat-label">Focus sessions logged</div><div class="stat-value">${state.focusMinutes} min</div><p class="small">Add actual-duration tracking in your routine to compare estimates with reality.</p>`}
+function openTaskModal(){editingId=null;$('modalTitle').textContent='Add a task';$('taskForm').reset();$('taskStart').value='09:00';$('taskModal').classList.add('show')}
+function closeTaskModal(){$('taskModal').classList.remove('show')}
+function editTask(id){let t=state.tasks.find(x=>x.id===id);if(!t)return;editingId=id;$('modalTitle').textContent='Edit task';$('taskName').value=t.name;$('taskCategory').value=t.category;$('taskPriority').value=t.priority;$('taskStart').value=t.start;$('taskDuration').value=t.duration;$('taskModal').classList.add('show')}
+$('taskForm').addEventListener('submit',e=>{e.preventDefault();let t={id:editingId||Date.now(),name:$('taskName').value.trim(),category:$('taskCategory').value,priority:$('taskPriority').value,start:$('taskStart').value,duration:Number($('taskDuration').value),done:false};if(editingId){let old=state.tasks.find(x=>x.id===editingId);t.done=old.done;state.tasks=state.tasks.map(x=>x.id===editingId?t:x)}else state.tasks.push(t);closeTaskModal();save();toast('Task saved to your day.')});
+function deleteTask(id){state.tasks=state.tasks.filter(t=>t.id!==id);save();toast('Task removed.')}
+function toggleTask(id){let t=state.tasks.find(x=>x.id===id);if(t){t.done=!t.done;save()}}
+function toggleTimer(){if(timerRunning){clearInterval(timerInterval);timerRunning=false;updateTimerButtons();return}timerRunning=true;sessionStart=Date.now();timerInterval=setInterval(()=>{timerSeconds--;if(timerSeconds<=0){clearInterval(timerInterval);timerRunning=false;state.focusMinutes+=selectedMinutes;save();timerSeconds=selectedMinutes*60;toast('Focus session complete. Take a short break.')}updateTimerDisplay();updateTimerButtons()},1000);updateTimerButtons()}
+function resetTimer(){clearInterval(timerInterval);timerRunning=false;timerSeconds=selectedMinutes*60;updateTimerDisplay();updateTimerButtons()}
+function updateTimerDisplay(){let str=String(Math.floor(timerSeconds/60)).padStart(2,'0')+':'+String(timerSeconds%60).padStart(2,'0');$('miniTimer').textContent=str;$('focusTimer').textContent=str}
+function updateTimerButtons(){let text=timerRunning?'Pause focus':'Start focus';document.querySelectorAll('#focusStart').forEach(b=>b.textContent=text);document.querySelectorAll('.focus-card .timer-controls .btn:first-child').forEach(b=>b.textContent=text)}
+document.querySelectorAll('.focus-mode button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.focus-mode button').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');selectedMinutes=Number(b.dataset.min);resetTimer()}));
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$(b.dataset.page).classList.add('active');let titles={dashboard:"Good day. Let's make it count.",planner:"Plan a day that works for you.",tasks:"Make progress, one task at a time.",insights:"See how your time is being used.",focus:"Create space for focused work.",wellbeing:"Your well-being is part of productivity.",settings:"Make DAYFLOW fit your routine."};$('pageTitle').textContent=titles[b.dataset.page]}));
+function saveSettings(){state.settings={name:$('userName').value,start:$('dayStart').value,end:$('dayEnd').value,focus:Number($('prefFocus').value),goal:$('mainGoal').value};save();toast('Preferences saved.')}
+function resetData(){if(!confirm('Reset all DAYFLOW demo tasks and settings?'))return;localStorage.removeItem(STORE);state=loadState();render();toast('Demo data reset.')}
+function init(){let now=new Date();$('todayDate').textContent=now.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric',year:'numeric'});let h=now.getHours();$('greeting').textContent=h<12?'GOOD MORNING':h<18?'GOOD AFTERNOON':'GOOD EVENING';$('userName').value=state.settings.name||'';$('dayStart').value=state.settings.start||'07:00';$('dayEnd').value=state.settings.end||'22:00';$('prefFocus').value=state.settings.focus||25;$('mainGoal').value=state.settings.goal||'Balanced productivity and well-being';selectedMinutes=Number(state.settings.focus||25);timerSeconds=selectedMinutes*60;updateTimerDisplay();render()}
+init();
+</script>
+
+<div id="installBanner" style="display:none;position:fixed;left:14px;right:14px;bottom:82px;z-index:30;background:#14243b;color:white;padding:13px 15px;border-radius:15px;box-shadow:0 12px 35px #07182b55;align-items:center;gap:10px">
+  <div style="flex:1"><b style="font-size:13px">Install DAYFLOW AI</b><div style="font-size:10px;color:#c3d2e3">Add it to your home screen for an app-like experience.</div></div>
+  <button id="installBtn" style="background:#07968c;color:white;border-radius:9px;padding:9px 11px;font-weight:700;font-size:11px">Install</button>
+  <button id="dismissInstall" aria-label="Dismiss" style="background:transparent;color:#dce7f3;font-size:18px;padding:3px 6px">×</button>
+</div>
+<script>
+let deferredInstallPrompt=null;
+const installBanner=document.getElementById('installBanner');
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault(); deferredInstallPrompt=e; installBanner.style.display='flex';
+});
+document.getElementById('installBtn').addEventListener('click',async()=>{
+  if(!deferredInstallPrompt){alert('To install: open this site in your browser menu and choose “Add to Home Screen” or “Install app”.');return;}
+  deferredInstallPrompt.prompt(); await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt=null; installBanner.style.display='none';
+});
+document.getElementById('dismissInstall').addEventListener('click',()=>installBanner.style.display='none');
+if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
+}
+</script>
+
+</body>
+</html>
